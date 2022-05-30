@@ -6,12 +6,9 @@ import java.util.*
 
 @Parcelize
 data class RecipeInfo(
-    val title: String,
-    val calories: String,
-    val carbs: String,
-    val fat: String,
-    val protein: String,
-    val image: String,
     val id: Int,
+    val title: String,
+    val image: String,
+    val imageType: String,
 ) : Parcelable {
 }

@@ -12,11 +12,13 @@
         android:layout_width="121dp"
         android:layout_height="58dp"
         android:layout_marginTop="56dp"
+        android:backgroundTint="#5C5CA1"
+        android:scaleType="fitCenter"
         app:layout_constraintEnd_toStartOf="@+id/bookmark_button_bookmarks"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/bookmark_button_home"
         app:layout_constraintTop_toBottomOf="@+id/bookmark_textView"
-        app:srcCompat="?android:attr/listChoiceIndicatorMultiple" />
+        app:srcCompat="@drawable/history" />
 
     <TextView
         android:id="@+id/bookmark_textView"
@@ -50,22 +52,26 @@
         android:layout_width="121dp"
         android:layout_height="58dp"
         android:layout_marginTop="56dp"
+        android:backgroundTint="#5C5CA1"
+        android:scaleType="fitCenter"
         app:layout_constraintEnd_toStartOf="@+id/bookmark_button_history"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/bookmark_textView"
-        app:srcCompat="?android:attr/listChoiceIndicatorMultiple" />
+        app:srcCompat="@drawable/home" />
 
     <ImageButton
         android:id="@+id/bookmark_button_bookmarks"
         android:layout_width="121dp"
         android:layout_height="58dp"
         android:layout_marginTop="56dp"
+        android:backgroundTint="#5C5CA1"
+        android:scaleType="fitCenter"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/bookmark_button_history"
         app:layout_constraintTop_toBottomOf="@+id/bookmark_textView"
-        app:srcCompat="?android:attr/listChoiceIndicatorMultiple" />
+        app:srcCompat="@drawable/bookmark" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/bookmark_RecyclerView"
