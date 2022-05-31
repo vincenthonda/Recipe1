@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.squareup.picasso.Picasso
 
-class RecipeAdapter(var dataSet : List<RecipeInfo>) : RecyclerView.Adapter<RecipeAdapter.ViewHolder>() {
+class RecipeAdapter(var dataSet: List<RecipeItem>) : RecyclerView.Adapter<RecipeAdapter.ViewHolder>() {
 
     class ViewHolder(view : View) : RecyclerView.ViewHolder(view) {
         val textViewTitle : TextView
@@ -38,6 +38,8 @@ class RecipeAdapter(var dataSet : List<RecipeInfo>) : RecyclerView.Adapter<Recip
         // Get element from your dataset at this position and replace the
         // contents of the view with that element
         val recipe = dataSet[position]
+
+
         viewHolder.textViewTitle.text = recipe.title
         viewHolder.textViewID.text = recipe.id.toString()
         Picasso.get().load(recipe.image).into(viewHolder.imageViewPic)
@@ -48,7 +50,7 @@ class RecipeAdapter(var dataSet : List<RecipeInfo>) : RecyclerView.Adapter<Recip
             val recipeDetailIntent = Intent(context, RecipeDetail::class.java).apply{
                 putExtra(RecipeDetail.EXTRA_RECIPE, recipe)
             }
-            HomeActivity.historyList.add(recipe)
+            //HomeActivity.historyList.add(recipe)
             context.startActivity(recipeDetailIntent)
         }
     }
@@ -56,3 +58,5 @@ class RecipeAdapter(var dataSet : List<RecipeInfo>) : RecyclerView.Adapter<Recip
     // Return the size of your dataset (invoked by the layout manager)
     override fun getItemCount() = dataSet.size
 }
+
+//private fun <E> MutableList<E>.add(element: RecipeItem) {}

@@ -21,7 +21,6 @@ class HomeActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_home)
 
         binding = ActivityHomeBinding.inflate(layoutInflater)
         val view = binding.root
@@ -58,9 +57,9 @@ class HomeActivity : AppCompatActivity() {
 
 
         searchButton.setOnClickListener {
-            searchEntry = textbox.query as String
-            val detailIntent = Intent(this,RecipeDetail::class.java)
-            startActivity(detailIntent)
+            searchEntry = textbox.getQuery().toString()
+            val resultsIntent = Intent(this,RecipeResults::class.java)
+            startActivity(resultsIntent)
         }
 
 

@@ -13,18 +13,24 @@ import retrofit2.Response
 class RecipeResults : AppCompatActivity() {
 
     private lateinit var binding : ActivityRecipeResultsBinding
-    val TAG = "RecipeResultsActvity"
+    val TAG = "RecipeResultsActivity"
+    private lateinit var adapter: RecipeAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityRecipeResultsBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val resultsList = mutableListOf<RecipeInfo>()
+        var recipeList = mutableListOf<RecipeItem>()
 
-        val historyButton = findViewById<ImageButton>(R.id.history_button_home)
-        val homeButton = findViewById<ImageButton>(R.id.home_button_home)
-        val bookmarkButton = findViewById<ImageButton>(R.id.history_button_bookmarks)
+
+        adapter = RecipeAdapter(recipeList)
+
+        //val resultsList = mutableListOf<RecipeInfo>()
+
+        val historyButton = findViewById<ImageButton>(R.id.results_button_home)
+        val homeButton = findViewById<ImageButton>(R.id.results_button_home)
+        val bookmarkButton = findViewById<ImageButton>(R.id.results_button_bookmarks)
 
         historyButton.setOnClickListener {
             val historyIntent = Intent(this,HistoryActivity::class.java)
@@ -39,18 +45,30 @@ class RecipeResults : AppCompatActivity() {
             startActivity(bookmarkIntent)
         }
 
+        val query = HomeActivity.searchQuery
+        val entry = HomeActivity.searchEntry
         val recipeApi = RetrofitHelper.getInstance().create(RecipeService::class.java)
-        val recipeCall = recipeApi.getSearchQ(HomeActivity.searchQuery, HomeActivity.searchEntry)
+        var recipeCall = recipeApi.getSearchQ(HomeActivity.searchEntry)
+        //recipeCall[0]
+        //Log.d(TAG, recipeApi.getSearchQ("chicken parm").toString() + recipeCall.toString())
 
-        recipeCall.enqueue(object : Callback<List<RecipeInfo>> {
+        //if(query=="Recipe") {
+        //    recipeCall = recipeApi.getSearchQ(HomeActivity.searchEntry)
+        //} else {
+        //    recipeCall = recipeApi.getSearchQ(HomeActivity.searchEntry)
+        //}
+        recipeCall.enqueue(object : Callback<List<RecipeItem>> {
             override fun onResponse(
-                call: Call<List<RecipeInfo>>,
-                response: Response<List<RecipeInfo>>,
+                call: Call<List<RecipeItem>>,
+                response: Response<List<RecipeItem>>
             ) {
                 Log.d(TAG, "onResponse: ${response.body()}")
+                recipeList = ((response.body()?.first() ?: listOf<RecipeItem>()) as MutableList<RecipeItem>)
+                adapter = RecipeAdapter(recipeList)
+                binding.resultsRecyclerView.adapter = adapter
             }
 
-            override fun onFailure(call: Call<List<RecipeInfo>>, t: Throwable) {
+            override fun onFailure(call: Call<List<RecipeItem>>, t: Throwable) {
                 Log.d(TAG, "onFailure: ${t.message}")
             }
 

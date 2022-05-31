@@ -22,7 +22,7 @@ class RecipeDetail : AppCompatActivity() {
         setContentView(binding.root)
 
 
-        val recipeInfo = intent.getParcelableExtra<RecipeInfo>(EXTRA_RECIPE)
+        val recipeItem = intent.getParcelableExtra<RecipeItem>(EXTRA_RECIPE)
 
         val homeButton = findViewById<ImageButton>(R.id.detail_imageButton_home)
 
@@ -32,6 +32,6 @@ class RecipeDetail : AppCompatActivity() {
         }
 
 
-        Picasso.get().load("https://api.spoonacular.com/recipes/" + recipeInfo?.id.toString() +"/card").into(binding.detailImageView)
+        Picasso.get().load("https://api.spoonacular.com/recipes/" + recipeItem?.id.toString() +"/card").into(binding.detailImageView)
     }
 }

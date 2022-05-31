@@ -3,7 +3,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 object RetrofitHelper {
-    val baseUrl = "https://api.spoonacular.com/recipes/complexSearch"
+    val baseUrl = "https://api.spoonacular.com/recipes/"
     fun getInstance() : Retrofit {
         return Retrofit.Builder()
             .baseUrl(baseUrl)
