@@ -12,17 +12,19 @@ class RecipeDetail : AppCompatActivity() {
 
     private lateinit var binding: ActivityRecipeDetailBinding
 
+    companion object {
+        val EXTRA_RECIPE = "The recipe"
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_recipe_detail)
+        binding = ActivityRecipeDetailBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
+
+        val recipeInfo = intent.getParcelableExtra<RecipeInfo>(EXTRA_RECIPE)
 
         val homeButton = findViewById<ImageButton>(R.id.detail_imageButton_home)
-        val id : Int = 980
-        val imageUrl: String = "https://api.spoonacular.com/recipes/"+ id +"/card"
-
-        binding = ActivityRecipeDetailBinding.inflate(layoutInflater)
-        val view = binding.root
-        setContentView(view)
 
         homeButton.setOnClickListener {
             val homeIntent = Intent(this,HomeActivity::class.java)
@@ -30,6 +32,6 @@ class RecipeDetail : AppCompatActivity() {
         }
 
 
-        Picasso.get().load(imageUrl).into(binding.detailImageView)
+        Picasso.get().load("https://api.spoonacular.com/recipes/" + recipeInfo?.id.toString() +"/card").into(binding.detailImageView)
     }
 }

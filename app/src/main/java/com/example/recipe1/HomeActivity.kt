@@ -13,8 +13,8 @@ class HomeActivity : AppCompatActivity() {
     companion object {
         var searchQuery: String = "query"
         var searchEntry: String = "pie"
-        var historyList = listOf<RecipeInfo>()
-        var bookmarkList = listOf<RecipeInfo>()
+        var historyList = mutableListOf<RecipeInfo>()
+        var bookmarkList = mutableListOf<RecipeInfo>()
     }
 
     private lateinit var binding: ActivityHomeBinding
